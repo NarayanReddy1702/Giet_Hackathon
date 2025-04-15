@@ -5,6 +5,7 @@ import Home from "../sections/Home";
 import Quiz from "../components/Quiz"
 import Score from "../sections/Score";
 import About from "../sections/About";
+import Hackathon from "../sections/Hackathon";
 
 const router= createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router= createBrowserRouter([
             {
                 path:"/Quiz",
                 element:<Quiz/>
+            },
+            {
+                path:"/Hackathon",
+                element:<Hackathon/>
             }
         ]
     }

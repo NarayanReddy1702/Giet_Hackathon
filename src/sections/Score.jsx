@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Score = () => {
+  const score=JSON.parse(window.localStorage.getItem("score"))
+  const attempt=JSON.parse(window.localStorage.getItem("Attempt"))
+  console.log(score);
+  const navigate=useNavigate()
   // This would typically come from your quiz state management
-  const score = 4
   const totalQuestions = 5
   const percentage = (score / totalQuestions) * 100
+
+  const redirectQuiz=()=>{
+  navigate("/Quiz")
+  window.localStorage.setItem("updateAtm",JSON.stringify(attempt+1))
+  }
+  
 
   return (
     <div className="min-h-screen bg-black text-white py-20">
@@ -40,6 +50,11 @@ const Score = () => {
                     r="45"
                     cx="50"
                     cy="50"
+                    style={{
+                      transform: "rotate(-90deg)",
+                      transformOrigin: "50% 50%",
+                      animation: "progress 1.5s ease-out 0.5s forwards"
+                    }}
                   />
                 </svg>
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
@@ -63,7 +78,7 @@ const Score = () => {
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Questions Attempted</span>
-                    <span className="text-blue-400 font-medium">{totalQuestions}</span>
+                    <span className="text-blue-400 font-medium">{attempt}</span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-gray-300">Correct Answers</span>
@@ -76,7 +91,7 @@ const Score = () => {
                 <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300">
                   Review Answers
                 </button>
-                <button className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300">
+                <button onClick={redirectQuiz} className="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300">
                   Try Again
                 </button>
               </div>

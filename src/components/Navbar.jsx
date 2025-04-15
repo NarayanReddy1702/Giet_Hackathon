@@ -58,6 +58,18 @@ const Navbar = () => {
         >
           Quiz
         </NavLink>
+        <NavLink 
+          to="/Hackathon" 
+          className={({ isActive }) => 
+            `font-medium px-4 py-2 rounded-md transition-all duration-300 ${
+              isActive 
+               ? 'text-blue-600 underline decoration-blue-600 ' 
+                : 'text-gray-700 hover:text-blue-600 hover:underline hover:decoration-blue-600'
+            }`
+          }
+        >
+          Hackathon
+        </NavLink>
       </div>
 
       <div className="hidden md:flex gap-4">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const questions = [
   {
@@ -54,12 +55,16 @@ const questions = [
 ]
 
 const Quiz = () => {
+  const navigate=useNavigate()
+  const [attempt,setAttempt]=useState(1)
+
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [selectedOption, setSelectedOption] = useState(null)
   const [score, setScore] = useState(0)
   const [showScore, setShowScore] = useState(false)
   const [progress, setProgress] = useState(0)
 
+  const updateAtm=JSON.parse(window.localStorage.getItem("updateAtm"))
   const handleOptionClick = (optionIndex) => {
     setSelectedOption(optionIndex)
   }
@@ -75,6 +80,9 @@ const Quiz = () => {
       setProgress(progress + 20) // Increase progress by 20% for each question
     } else {
       setShowScore(true)
+      navigate("/Score")
+      window.localStorage.setItem("score",JSON.stringify(score))
+      window.localStorage.setItem("Attempt",JSON.stringify(attempt))
     }
   }
 
@@ -92,7 +100,7 @@ const Quiz = () => {
               </div>
               <div className="flex justify-between text-sm text-blue-600">
                 <span>Question {currentQuestion + 1} of {questions.length}</span>
-                <span>Score: {score}</span>
+                <span>Attempt: {updateAtm>1?updateAtm:attempt}</span>
               </div>
             </div>
 
